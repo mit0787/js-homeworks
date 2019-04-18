@@ -1,13 +1,12 @@
 'use strict';
 
 let num = 33721,
-    arr = String(num).split(""),
+    str = String(num),
     total = 1;
-for (let i = 0; i < arr.length; i++) {
-  total *= arr[i];
+for (let i = 0; i < str.length; i++) {
+  total *= str[i];
 }
 console.log(total);
 let exponent = total ** 3,
-    number = String(exponent).split("");
-number.length = 2;
-alert(number);
+    number = String(exponent);
+alert(number[0] + "," + number[1]);
