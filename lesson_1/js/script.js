@@ -20,5 +20,5 @@ appData.expenses[expenseTwo] = costTwo;
 for (let name in appData.expenses) {
   expenseSum += appData.expenses[name];
 }
-let budgetPerDay = (appData.budget - expenseSum) / 30;
+let budgetPerDay = Math.floor((appData.budget - expenseSum) / 30);
 alert(Math.floor("Ваш бюджет в день составляет " + budgetPerDay));
