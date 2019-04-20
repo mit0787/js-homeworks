@@ -1,7 +1,7 @@
 'use strict';
 
 let money = +prompt("Ваш бюджет на месяц?", ""),
-    time = prompt("Введите дату в формате YYYY-MM-DD", ""),
+    time = prompt("Введите дату в формате YYYY-MM-DD", new Date().toISOString().slice(0,10)),
     appData = {
       budget: money,
       timeData: time,
@@ -11,21 +11,7 @@ let money = +prompt("Ваш бюджет на месяц?", ""),
       savings: false
     };
 
-for (let i = 0; i < 2; i++) {
-  let expense = prompt("Введите обязательную статью расходов в этом месяце", ""),
-      cost = +prompt("Во сколько обойдется?", "");
-  
-  if ((typeof(expense)) === 'string' && (typeof(expense)) != null && (typeof(cost)) != null
-      && expense != '' && cost != '' && expense.length < 50) {
-      appData.expenses[expense] = cost;
-      } else {
-        i--;
-      }
-}
-
-// let i = 0;
-// while (i < 2) {
-//   i++;
+// for (let i = 0; i < 2; i++) {
 //   let expense = prompt("Введите обязательную статью расходов в этом месяце", ""),
 //       cost = +prompt("Во сколько обойдется?", "");
   
@@ -36,6 +22,20 @@ for (let i = 0; i < 2; i++) {
 //         i--;
 //       }
 // }
+
+let i = 0;
+while (i < 2) {
+  i++;
+  let expense = prompt("Введите обязательную статью расходов в этом месяце", ""),
+      cost = +prompt("Во сколько обойдется?", "");
+  
+  if ((typeof(expense)) === 'string' && (typeof(expense)) != null && (typeof(cost)) != null
+      && expense != '' && cost != '' && expense.length < 50) {
+      appData.expenses[expense] = cost;
+      } else {
+        i--;
+      }
+}
 
 // let i = 0;
 // do {
