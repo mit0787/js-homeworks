@@ -73,13 +73,15 @@ let appData = {
       items = prompt("Что принесет дополнительный доход? (Перечислите через запятую)");
     }
     appData.income = items.split(", ");
+    appData.income.unshift('');
+    delete appData.income[0];
   }
 };
 
 function lookProperties() {
   let str = "";
   for (let key in appData) {
-    str = str + key + " : " + appData[key] + ", ";
+    str = str + key + ", ";
   }
   str = "Наша программа включает в себя данные: " +str;
   return str;
@@ -90,7 +92,7 @@ console.log(lookProperties());
 function lookIncome() {
   let str = "";
   appData.income.forEach(function (item, i) {
-    str = str + ((i + 1) + ": " + item + ", ");
+    str = str + ((i) + ": " + item + ", ");
   });
   str = "Способы доп. заработка: " + str;
   return str;
