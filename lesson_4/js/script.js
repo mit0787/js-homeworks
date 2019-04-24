@@ -24,7 +24,7 @@ let appData = {
       let expense = prompt("Введите обязательную статью расходов в этом месяце", ""),
         cost = +prompt("Во сколько обойдется?", "");
     
-      if ((typeof (expense)) === 'string' && (typeof (expense)) != null && (typeof (cost)) != null &&
+      if ((typeof (expense)) === 'string' && expense != null && cost != null &&
         expense != '' && cost != '' && expense.length < 50) {
         appData.expenses[expense] = cost;
       } else {
@@ -36,7 +36,7 @@ let appData = {
     for (let i = 0; i < 3; i++) {
       let optExpense = prompt("Статья необязательных расходов?", "");
     
-      if ((typeof (optExpense)) === 'string' && (typeof (expense)) != null && optExpense != '' && optExpense.length < 50) {
+      if ((typeof (optExpense)) === 'string' && optExpense != null && optExpense != '' && optExpense.length < 50) {
         appData.optionalExpenses[i+1] = optExpense;
       } else {
         i--;
@@ -69,7 +69,7 @@ let appData = {
   },
   chooseIncome: function() {
     let items = prompt("Что принесет дополнительный доход? (Перечислите через запятую)");
-    while ((typeof(items)) !== 'string' || (typeof(items)) == null || items == '') {
+    while ((typeof(items)) !== 'string' || items == null || items == '') {
       items = prompt("Что принесет дополнительный доход? (Перечислите через запятую)");
     }
     appData.income = items.split(", ");

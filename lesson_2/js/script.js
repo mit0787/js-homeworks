@@ -15,7 +15,7 @@ let money = +prompt("Ваш бюджет на месяц?", ""),
 //   let expense = prompt("Введите обязательную статью расходов в этом месяце", ""),
 //       cost = +prompt("Во сколько обойдется?", "");
   
-//   if ((typeof(expense)) === 'string' && (typeof(expense)) != null && (typeof(cost)) != null
+//   if ((typeof(expense)) === 'string' && expense != null && cost != null
 //       && expense != '' && cost != '' && expense.length < 50) {
 //       appData.expenses[expense] = cost;
 //       } else {
@@ -29,7 +29,7 @@ while (i < 2) {
   let expense = prompt("Введите обязательную статью расходов в этом месяце", ""),
       cost = +prompt("Во сколько обойдется?", "");
   
-  if ((typeof(expense)) === 'string' && (typeof(expense)) != null && (typeof(cost)) != null
+  if ((typeof(expense)) === 'string' && expense != null && cost != null
       && expense != '' && cost != '' && expense.length < 50) {
       appData.expenses[expense] = cost;
       } else {
@@ -43,7 +43,7 @@ while (i < 2) {
 //   let expense = prompt("Введите обязательную статью расходов в этом месяце", ""),
 //       cost = +prompt("Во сколько обойдется?", "");
   
-//   if ((typeof(expense)) === 'string' && (typeof(expense)) != null && (typeof(cost)) != null
+//   if ((typeof(expense)) === 'string' && expense != null && cost != null
 //       && expense != '' && cost != '' && expense.length < 50) {
 //       appData.expenses[expense] = cost;
 //       } else {
