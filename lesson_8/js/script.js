@@ -82,7 +82,7 @@ window.addEventListener('DOMContentLoaded', function () {
         minutes.textContent = "00";
         seconds.textContent = "00";
       }
-    };
+    }
   }
 
   setClock('timer', deadLine);
