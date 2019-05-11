@@ -8,4 +8,6 @@ function showUser(surname, name) {
 
 showUser = showUser.bind(age); // привязываем значение инпута к функции, контекстом вызова this станет age
 
-showUser('Гайдук', 'Дмитрий');
+age.addEventListener('change', function () { // выводим сообщение при изменении значения
+  showUser('Гайдук', 'Дмитрий');
+});
