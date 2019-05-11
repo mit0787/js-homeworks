@@ -110,11 +110,15 @@ window.addEventListener('DOMContentLoaded', function () {
     document.body.style.overflow = 'hidden';
   });
 
+  let reg = /^\+[\d]{1}\([\d]{3}\)[\d]{3}-[\d]{2}-[\d]{2}$/; // регулярное выражение для проверки телефона
+  let phone = document.querySelectorAll('input[name="phone"]'); // получаем поля с телефонами
+
   // формы
   let message = { // объект с выводими сообщениями
     loading: 'Загрузка...',
     success: 'Спасибо! Скоро мы с вами свяжемся',
-    failure: 'Что-то пошло не так...'
+    failure: 'Что-то пошло не так...',
+    error: 'Введите номер в формате +7(999)999-99-99'
   };
 
   // в модальном окне
@@ -128,6 +132,10 @@ window.addEventListener('DOMContentLoaded', function () {
   form.addEventListener('submit', function (event) { // действия при отправке данных
     event.preventDefault(); // убираем дефолтное действие
     form.appendChild(statusMassege); // добавляем див с сообщением
+
+    if (!reg.exec(phone[1].value)) {
+      statusMassege.innerHTML = message.error;
+    } else {
 
     let request = new XMLHttpRequest(); // начинаем обмен данными с сервером
 
@@ -156,12 +164,17 @@ window.addEventListener('DOMContentLoaded', function () {
     for (let i = 0; i < input.length; i++) { // очистка полей формы
       input[i].value = '';
     }
+  }
   });
 
   // внизу страницы
   secondForm.addEventListener('submit', function (event) { // действия при отправке данных
     event.preventDefault(); // убираем дефолтное действие
-    form.appendChild(statusMassege); // добавляем див с сообщением
+    secondForm.appendChild(statusMassege); // добавляем див с сообщением
+    
+    if (!reg.exec(phone[0].value)) {
+      statusMassege.innerHTML = message.error;
+    } else {
 
     let request = new XMLHttpRequest(); // начинаем обмен данными с сервером
 
@@ -189,5 +202,7 @@ window.addEventListener('DOMContentLoaded', function () {
     for (let i = 0; i < input.length; i++) { // очистка полей формы
       input[i].value = '';
     }
+  }
   });
+
 });
