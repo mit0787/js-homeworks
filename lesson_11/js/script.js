@@ -133,7 +133,7 @@ window.addEventListener('DOMContentLoaded', function () {
     event.preventDefault(); // убираем дефолтное действие
     form.appendChild(statusMassege); // добавляем див с сообщением
 
-    if (!reg.exec(phone[1].value)) {
+    if (!reg.test(phone[1].value)) { // проверяем номер
       statusMassege.innerHTML = message.error;
     } else {
 
@@ -172,7 +172,7 @@ window.addEventListener('DOMContentLoaded', function () {
     event.preventDefault(); // убираем дефолтное действие
     secondForm.appendChild(statusMassege); // добавляем див с сообщением
     
-    if (!reg.exec(phone[0].value)) {
+    if (!reg.test(phone[0].value)) {
       statusMassege.innerHTML = message.error;
     } else {
 
