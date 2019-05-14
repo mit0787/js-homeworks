@@ -247,16 +247,17 @@ window.addEventListener('DOMContentLoaded', function () {
     totalValue = document.getElementById('total'),
     personsSum = 0,
     daySum = 0,
+    placeValue = place.options[place.selectedIndex].value, // получаем значение у опции места
     total = 0;
 
   totalValue.textContent = 0;
 
-  persons.addEventListener('change', function () { 
+  persons.addEventListener('change', function () {
     personsSum = +this.value;
     total = (daySum + personsSum) * 4000;
-    totalValue.textContent = total;
-    if (restDays.value == '' || restDays.value == '0' || persons.value == '' || persons.value == '0') {
-      totalValue.textContent = 0; // обнуляем итоговое значение, если одно из полей пустое или равно нулю
+    totalValue.textContent = total * placeValue; // выводим значение с учетом места
+    if (persons.value == '' || persons.value == '0' || restDays.value == '' || restDays.value == '0') {
+      totalValue.textContent = 0;
     }
   });
 
@@ -267,7 +268,7 @@ window.addEventListener('DOMContentLoaded', function () {
   restDays.addEventListener('change', function () {
     daySum = +this.value;
     total = (daySum + personsSum) * 4000;
-    totalValue.textContent = total;
+    totalValue.textContent = total * placeValue;
     if (persons.value == '' || persons.value == '0' || restDays.value == '' || restDays.value == '0') {
       totalValue.textContent = 0;
     }
@@ -278,12 +279,10 @@ window.addEventListener('DOMContentLoaded', function () {
   });
 
   place.addEventListener('change', function () {
-    if (restDays.value == '' || persons.value == '') {
+    placeValue = this.options[this.selectedIndex].value; // получаем значение при каждом выборе
+    totalValue.textContent = total * placeValue;
+    if (persons.value == '' || persons.value == '0' || restDays.value == '' || restDays.value == '0') {
       totalValue.textContent = 0;
-    } else {
-      let a = total;
-      totalValue.textContent = a * this.options[this.selectedIndex].value;
     }
   });
-
 });
