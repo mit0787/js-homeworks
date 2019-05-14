@@ -251,19 +251,16 @@ window.addEventListener('DOMContentLoaded', function () {
 
   totalValue.textContent = 0;
 
-  persons.addEventListener('change', function () {
+  persons.addEventListener('change', function () { 
     personsSum = +this.value;
     total = (daySum + personsSum) * 4000;
     totalValue.textContent = total;
-    if (restDays.value == '' || restDays.value == '0') {
-      totalValue.textContent = 0;
-    }
-    if (persons.value == '' || persons.value == '0') {
-      totalValue.textContent = 0;
+    if (restDays.value == '' || restDays.value == '0' || persons.value == '' || persons.value == '0') {
+      totalValue.textContent = 0; // обнуляем итоговое значение, если одно из полей пустое или равно нулю
     }
   });
 
-  persons.addEventListener('input', function () {
+  persons.addEventListener('input', function () { // разрешаем ввод только цифр
     this.value = this.value.replace(/[^\d]/g, '');
   });
 
@@ -271,10 +268,7 @@ window.addEventListener('DOMContentLoaded', function () {
     daySum = +this.value;
     total = (daySum + personsSum) * 4000;
     totalValue.textContent = total;
-    if (persons.value == '' || persons.value == '0') {
-      totalValue.textContent = 0;
-    }
-    if (restDays.value == '' || restDays.value == '0') {
+    if (persons.value == '' || persons.value == '0' || restDays.value == '' || restDays.value == '0') {
       totalValue.textContent = 0;
     }
   });
