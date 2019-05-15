@@ -1,17 +1,19 @@
 $(document).ready(function () {
-  $('a[href="#sheldure"]').click(function () {
+  let showModal = () => {
     $('.overlay').fadeIn();
     $('.modal').slideDown();
+  }
+
+  $('a[href="#sheldure"]').click(function () {
+    showModal();
   });
 
   $('a[href="#tour"]').click(function () {
-    $('.overlay').fadeIn();
-    $('.modal').slideDown();
+    showModal();
   });
 
   $('.contact').click(function () {
-    $('.overlay').fadeIn();
-    $('.modal').slideDown();
+    showModal();
   });
 
   $('.close').click(function () {
