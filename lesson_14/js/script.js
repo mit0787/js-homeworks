@@ -2,7 +2,7 @@ $(document).ready(function () {
   let showModal = () => {
     $('.overlay').fadeIn();
     $('.modal').slideDown();
-  }
+  };
 
   $('a[href="#sheldure"]').click(function () {
     showModal();
