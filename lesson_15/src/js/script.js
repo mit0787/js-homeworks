@@ -1,5 +1,7 @@
-'use strict';
+require('nodelist-foreach-polyfill');
+require('formdata-polyfill')
 window.addEventListener('DOMContentLoaded', function () {
+  'use strict';
 
   let tabs = require('./parts/tabs'),
       timer = require('./parts/timer'),

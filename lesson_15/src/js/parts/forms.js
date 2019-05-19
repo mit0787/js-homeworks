@@ -1,18 +1,25 @@
 function forms() {
-  let reg = /^\+[\d]{1}\([\d]{3}\)[\d]{3}-[\d]{2}-[\d]{2}$/; // регулярное выражение для проверки телефона
+  // регулярка для телефона
   let phone = document.querySelectorAll('input[name="phone"]'); // получаем поля с телефонами
 
+  phone.forEach(function (item) {
+    item.addEventListener('input', function () { // разрешаем ввод только цифр и +
+      this.value = this.value.replace(/[^\+\d]/g, '');
+    });
+  });
+
+  // формы
   let message = { // объект с выводими сообщениями
     loading: 'Загрузка...',
     success: 'Спасибо! Скоро мы с вами свяжемся',
     failure: 'Что-то пошло не так...',
-    error: 'Введите номер в формате +7(999)999-99-99'
   };
 
   // в модальном окне
   let form = document.querySelector('.main-form'), // получаем форму в модальном окне
     secondForm = document.getElementById('form'),
     input = form.getElementsByTagName('input'), // инпуты
+    secondInput = secondForm.getElementsByTagName('input'),
     statusMassege = document.createElement('div'); // создаем див для сообщения
 
   statusMassege.classList.add('status'); // присваиваем класс
@@ -46,16 +53,12 @@ function forms() {
     event.preventDefault(); // убираем дефолтное действие
     form.appendChild(statusMassege);
 
-    if (!reg.test(phone[1].value)) {
-      statusMassege.innerHTML = message.error;
-    } else {
-      postData(form) // запускаем функцию отправки данных и выполняем промисы
-        .then(() => statusMassege.innerHTML = message.success) // при удачной отправке
-        .catch(() => statusMassege.innerHTML = message.failure); // при ошибке
+    postData(form) // запускаем функцию отправки данных и выполняем промисы
+      .then(() => statusMassege.innerHTML = message.success) // при удачной отправке
+      .catch(() => statusMassege.innerHTML = message.failure); // при ошибке
 
-      for (let i = 0; i < input.length; i++) { // очистка полей формы
-        input[i].value = '';
-      }
+    for (let i = 0; i < input.length; i++) { // очистка полей формы
+      input[i].value = '';
     }
   });
 
@@ -63,17 +66,14 @@ function forms() {
   secondForm.addEventListener('submit', function (event) { // действия при отправке данных
     event.preventDefault(); // убираем дефолтное действие
     secondForm.appendChild(statusMassege); // добавляем див с сообщением
+    statusMassege.style.color = '#ffffff';
 
-    if (!reg.test(phone[0].value)) {
-      statusMassege.innerHTML = message.error;
-    } else {
-      postData(secondForm)
-        .then(() => statusMassege.innerHTML = message.success)
-        .catch(() => statusMassege.innerHTML = message.failure);
+    postData(secondForm)
+      .then(() => statusMassege.innerHTML = message.success)
+      .catch(() => statusMassege.innerHTML = message.failure);
 
-      for (let i = 0; i < input.length; i++) { // очистка полей формы
-        input[i].value = '';
-      }
+    for (let i = 0; i < secondInput.length; i++) { // очистка полей формы
+      secondInput[i].value = '';
     }
   });
 }
