@@ -20,7 +20,7 @@ function calc() {
   });
 
   persons.addEventListener('input', function () { // разрешаем ввод только цифр
-    this.value = this.value.replace(/[^\d]/g, '');
+    this.value = this.value.replace(/^0|[^\d]/g, '');
   });
 
   restDays.addEventListener('change', function () {
@@ -33,7 +33,7 @@ function calc() {
   });
 
   restDays.addEventListener('input', function () {
-    this.value = this.value.replace(/[^\d]/g, '');
+    this.value = this.value.replace(/^0|[^\d]/g, '');
   });
 
   place.addEventListener('change', function () {
