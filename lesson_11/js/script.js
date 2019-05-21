@@ -102,6 +102,8 @@ window.addEventListener('DOMContentLoaded', function () {
     overlay.style.display = "none";
     more.classList.remove('more-splash');
     document.body.style.overflow = '';
+    form.style.display = "block";
+    statusMassege.innerHTML = "";
   });
 
   more.addEventListener('click', function () {
@@ -110,32 +112,36 @@ window.addEventListener('DOMContentLoaded', function () {
     document.body.style.overflow = 'hidden';
   });
 
-  let reg = /^\+[\d]{1}\([\d]{3}\)[\d]{3}-[\d]{2}-[\d]{2}$/; // регулярное выражение для проверки телефона
   let phone = document.querySelectorAll('input[name="phone"]'); // получаем поля с телефонами
 
-  // формы
-  let message = { // объект с выводими сообщениями
-    loading: 'Загрузка...',
-    success: 'Спасибо! Скоро мы с вами свяжемся',
-    failure: 'Что-то пошло не так...',
-    error: 'Введите номер в формате +7(999)999-99-99'
-  };
+  phone.forEach(function (item) {
+    item.addEventListener('input', function () { // разрешаем ввод только цифр и +
+      this.value = this.value.replace(/[^\+\d]/g, '');
+    });
+  });
 
-  // в модальном окне
   let form = document.querySelector('.main-form'), // получаем форму в модальном окне
       secondForm = document.getElementById('form'),
       input = form.getElementsByTagName('input'), // инпуты
       statusMassege = document.createElement('div'); // создаем див для сообщения
 
+  // формы
+  let message = { // объект с выводими сообщениями
+    loading: '<div style="display: flex; flex-direction: column; justify-content: space-between; width: 576px; height: 150px;"><p style="margin: auto;">Загрузка...</p><img  style="margin: auto;" src="./icons/loader.gif"></div>',
+    success: '<div style="display: flex; flex-direction: column; justify-content: space-between; width: 576px; height: 150px;"><p style="margin: auto;">Спасибо! Скоро мы с вами свяжемся</p><img  style="width: 70px; margin: auto;" src="./icons/face.svg"></div>',
+    failure: '<div style="display: flex; flex-direction: column; justify-content: space-between; width: 576px; height: 150px;"><p style="margin: auto;">Что-то пошло не так...</p><img  style="width: 70px; margin: auto;" src="./icons/error.svg"></div>',
+  },
+
+  popupForm = document.querySelector('.popup-form');
+
+  // в модальном окне
+
   statusMassege.classList.add('status'); // присваиваем класс
 
   form.addEventListener('submit', function (event) { // действия при отправке данных
     event.preventDefault(); // убираем дефолтное действие
-    form.appendChild(statusMassege); // добавляем див с сообщением
-
-    if (!reg.test(phone[1].value)) { // проверяем номер
-      statusMassege.innerHTML = message.error;
-    } else {
+    popupForm.appendChild(statusMassege); // добавляем див с сообщением
+    form.style.display = "none";
 
     let request = new XMLHttpRequest(); // начинаем обмен данными с сервером
 
@@ -164,17 +170,15 @@ window.addEventListener('DOMContentLoaded', function () {
     for (let i = 0; i < input.length; i++) { // очистка полей формы
       input[i].value = '';
     }
-  }
+  
   });
 
   // внизу страницы
   secondForm.addEventListener('submit', function (event) { // действия при отправке данных
     event.preventDefault(); // убираем дефолтное действие
-    secondForm.appendChild(statusMassege); // добавляем див с сообщением
-    
-    if (!reg.test(phone[0].value)) {
-      statusMassege.innerHTML = message.error;
-    } else {
+    popupForm.appendChild(statusMassege); // добавляем див с сообщением
+    overlay.style.display = "block";
+    form.style.display = "none";
 
     let request = new XMLHttpRequest(); // начинаем обмен данными с сервером
 
@@ -202,7 +206,7 @@ window.addEventListener('DOMContentLoaded', function () {
     for (let i = 0; i < input.length; i++) { // очистка полей формы
       input[i].value = '';
     }
-  }
+
   });
 
 });
