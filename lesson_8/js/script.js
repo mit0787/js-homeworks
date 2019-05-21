@@ -3,11 +3,11 @@
 window.addEventListener('DOMContentLoaded', function () {
 
   let tab = document.querySelectorAll('.info-header-tab'),
-      info = document.querySelector('.info-header'),
-      tabContent = document.querySelectorAll('.info-tabcontent');
+    info = document.querySelector('.info-header'),
+    tabContent = document.querySelectorAll('.info-tabcontent');
 
   function hideTabContent(a) {
-    for (let i =a; i < tabContent.length; i++) {
+    for (let i = a; i < tabContent.length; i++) {
       tabContent[i].classList.remove('show');
       tabContent[i].classList.add('hide');
     }
@@ -38,26 +38,27 @@ window.addEventListener('DOMContentLoaded', function () {
   // timer
 
   let deadLine = '2019-05-13T16:40:00';
+
   function getTimeRemaining(endtime) {
     let t = Date.parse(endtime) - Date.parse(new Date()),
-        seconds = Math.floor((t / 1000) % 60),
-        minutes = Math.floor((t / 1000 / 60) % 60),
-        hours = Math.floor((t / (1000 * 60 * 60)));
-    
+      seconds = Math.floor((t / 1000) % 60),
+      minutes = Math.floor((t / 1000 / 60) % 60),
+      hours = Math.floor((t / (1000 * 60 * 60)));
+
     return {
-      'total' : t,
-      'hours' : hours,
-      'minutes' : minutes,
-      'seconds' : seconds
+      'total': t,
+      'hours': hours,
+      'minutes': minutes,
+      'seconds': seconds
     };
   }
 
   function setClock(id, endtime) {
     let timer = document.getElementById(id),
-        hours = timer.querySelector('.hours'),
-        minutes = timer.querySelector('.minutes'),
-        seconds = timer.querySelector('.seconds'),
-        timeInterval = setInterval(updateClock, 1000);
+      hours = timer.querySelector('.hours'),
+      minutes = timer.querySelector('.minutes'),
+      seconds = timer.querySelector('.seconds'),
+      timeInterval = setInterval(updateClock, 1000);
 
     function updateClock() {
       let t = getTimeRemaining(endtime);
@@ -72,7 +73,7 @@ window.addEventListener('DOMContentLoaded', function () {
       }
       if (t.seconds < 10) {
         seconds.textContent = "0" + t.seconds;
-      } 
+      }
       if (t.total <= 0) {
         clearInterval(timeInterval);
         hours.textContent = "00";
@@ -83,4 +84,21 @@ window.addEventListener('DOMContentLoaded', function () {
   }
 
   setClock('timer', deadLine);
+
+  // плавная прокрутка
+  let anchors = document.querySelectorAll('a[href*="#"]'); // получаем массив с якорными ссылками
+
+  anchors.forEach(function (item) {
+    item.addEventListener('click', function (event) {
+      event.preventDefault(); // отменяем стандартное действие
+
+      let block = item.getAttribute('href'); // получаем ID блока, на который ведет ссылка
+
+      document.querySelector(block).scrollIntoView({ // прокрутка к блоку
+        behavior: 'smooth', // тип анимации скролла
+        block: 'start' // вертикальное выравниевание
+      });
+    });
+  });
+
 });
